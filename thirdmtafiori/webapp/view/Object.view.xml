@@ -1,0 +1,124 @@
+<mvc:View xmlns:form="sap.ui.layout.form" 
+    controllerName="com.practice.thirdmtafiori.controller.Object"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+
+    <semantic:SemanticPage
+        id="page"
+        headerPinnable="false"
+        toggleHeaderOnTitleClick="false"
+        busy="{objectView>/busy}"
+        busyIndicatorDelay="{objectView>/delay}"
+        >
+
+        <semantic:titleHeading>
+            <HBox>
+                <Button type="Back" press="onNavBack" class="styleNavBackButton"/>
+                <Title
+                    text="{OrderID}"
+                    level="H2"/>
+            </HBox>
+            
+        </semantic:titleHeading>
+
+        <semantic:headerContent>
+            <Label text="{i18n>objectTitle}"></Label>
+            <ObjectNumber 
+                number="{
+                    path:'OrderDate',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions:{
+                        style: 'medium'
+                    }
+                }"/>
+        </semantic:headerContent>
+
+       <semantic:content>
+            <VBox>
+                <form:SimpleForm id="idOrderForm"
+                                editable="false"
+                                layout="ResponsiveGridLayout"
+                                title="{i18n>objectViewTitle}"
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false" >
+                    <form:content>
+                        <Label text="{i18n>CustomerID}" />
+                        <Text id="nameText" text="{CustomerID}" />
+                        <Label text="{i18n>OrderedBy}" />
+                        <Text text="{EmployeeID}" />
+                        <Label text="{i18n>RequiredDate}" />
+                        <Text text="{
+                                        path:'RequiredDate',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions:{
+                                            style: 'medium'
+                                        }
+                                    }" />
+                        <Label text="{i18n>ShippedDate}" />
+                        <Text text="{
+                                        path:'ShippedDate',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions:{
+                                            style: 'medium'
+                                        }
+                                    }" />
+                        <Label text="{i18n>FreightLabel}" />
+                        <Text id="freightText" 
+                              text="{
+                                 path: 'Freight',
+                                 formatter: '.formatter.numberUnit'
+                                 }" />
+                        <Label text="{i18n>ShipVia}" />
+                        <Text id="shipText" text="{ShipVia}" />
+                        <Label text="{i18n>ShipName}" />
+                        <Text id="shipnameText" text="{ShipName}" />
+                        <Label text="{i18n>ShipAddress}" />
+                        <Text id="addressText" text="{ShipAddress}, {ShipCity}, {ShipCountry} - {ShipPostalCode}" />
+                    </form:content>
+                </form:SimpleForm>
+                <Label
+                    wrapping="true"
+                    text="{i18n>ListforReference}"
+                    class="sapUiSmallMargin" />
+                <IconTabBar
+                    id="idIconTabBarNoIcons"
+                    expanded="{device>/isNoPhone}"
+                    class="sapUiResponsiveContentPadding">
+                    <items>
+                        <IconTabFilter text="{i18n>EmployeeList}" key="Employees">
+                            <l:Splitter id="eSplitter" width="100%">
+                                <core:Fragment fragmentName="com.practice.thirdmtafiori.fragment.employees" type="XML"/>
+                            </l:Splitter>
+                        </IconTabFilter>
+                        <IconTabFilter text="{i18n>SupplierList}" key="Shippers">
+                             <l:Splitter id="shSplitter" width="100%">
+                                <core:Fragment fragmentName="com.practice.thirdmtafiori.fragment.shippers" type="XML"/>
+                            </l:Splitter>
+                        </IconTabFilter>
+                    </items> 
+                    
+                </IconTabBar>
+            </VBox>
+		</semantic:content>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+    </semantic:SemanticPage>
+
+</mvc:View>

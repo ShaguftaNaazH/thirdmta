@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Table id="shippierTable" inset="false" showSeparators="Inner" headerText="Shippers" items="{/Shippers}">
+        <columns>
+            <Column>
+				<Text text="{i18n>ShipperID}" />
+            </Column>
+			<Column>
+				<Text text="{i18n>CompanyName}" />
+            </Column>
+            <Column>
+				<Text text="{i18n>Phone}" />
+			</Column>
+             
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+                    <Text
+						text="{ShipperID}" />
+					
+                    <Text
+						text="{CompanyName}" />
+                    <Text
+						text="{Phone}" />
+
+				</cells>
+			</ColumnListItem>
+		</items>
+    </Table>
+</core:FragmentDefinition>
